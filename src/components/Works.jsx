@@ -1,5 +1,5 @@
 import React from "react";
-import Tilt from "react-tilt";
+import Tilt from "react-parallax-tilt";
 import { motion } from "framer-motion";
 
 import { styles } from "../styles";
@@ -7,6 +7,8 @@ import { github } from "../assets";
 import { SectionWrapper } from "../hoc";
 import { projects } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
+
+
 
 const ProjectCard = ({
   index,
@@ -22,11 +24,10 @@ const ProjectCard = ({
       className="flex flex-col h-full"
     >
       <Tilt
-        options={{
-          max: 45,
-          scale: 1,
-          speed: 450,
-        }}
+        tiltMaxAngleX={45} // Angle maximum d'inclinaison sur X
+        tiltMaxAngleY={45} // Angle maximum d'inclinaison sur Y
+        scale={1} // Échelle de zoom
+        transitionSpeed={450} // Vitesse de transition
         className="bg-tertiary p-5 rounded-2xl w-full h-full flex flex-col"
       >
         <div className="relative w-full h-[230px]">
@@ -69,6 +70,7 @@ const ProjectCard = ({
     </motion.div>
   );
 };
+
 
 
 const Works = () => {
