@@ -12,6 +12,7 @@
     "@emailjs/browser": "^3.10.0",
     "@react-three/drei": "^9.56.24",
     "@react-three/fiber": "^8.11.1",
+    "@vercel/speed-insights": "^1.1.0",
     "axios": "^1.7.8",
     "caniuse-lite": "^1.0.30001684",
     "framer-motion": "^9.0.7",

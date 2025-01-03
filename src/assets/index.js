@@ -14,7 +14,7 @@ import applireleve from "./applireleve.png"
 import meteo from "./meteo.png"
 import sitecarbon from "./sitecarbon.png"
 import apiytb from "./apiytb.png"
-import moi from "./moiportfolio.jpg"
+import moi from "./moiportfolio.webp"
 
 import css from "./tech/css.png";
 import laravel from "./tech/laravel.png";

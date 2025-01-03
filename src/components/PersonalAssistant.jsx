@@ -3,23 +3,44 @@ import axios from "axios";
 import { gif, moi } from "../assets";
 import { SectionWrapper } from "../hoc";
 import { styles } from "../styles";
+import { motion } from "framer-motion"; // Importation de motion pour l'animation
+
+// Fonction fadeIn modifiée pour être utilisée dans un contexte de défilement
+const fadeIn = (direction = "up", type = "spring", delay = 0, duration = 1) => {
+  return {
+    hidden: {
+      opacity: 0,
+      y: direction === "up" ? 60 : 0, // Applique un décalage vers le bas (ou selon la direction)
+    },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: type,
+        delay: delay,
+        duration: duration,
+      },
+    },
+  };
+};
 
 const PersonalAssistant = () => {
   const personalData = `
 Présentation :
 Je m'appelle Rayene Ben Torkia, un développeur web passionné par la technologie et l'innovation. J'ai 20 ans et 
 je vis à Bonneuil-sur-Marne (94380). Actuellement, je suis inscrit à l'ETNA, une école spécialisée dans 
-l'informatique et la programmation, où je prépare un Bachelor Concepteur Développeur d’Applications que 
-j'obtiendrai en janvier 2025. Je suis à la recherche d'une alternance en développement web à partir de janvier 2025 
+l'informatique et la programmation, où je prépare un Master Concepteur Développeur d’Applications que 
+j'obtiendrai en octobre 2026. Je suis à la recherche d'une alternance en développement web à partir de janvier 2025 
 afin de continuer à évoluer professionnellement tout en consolidant mes compétences académiques.
+
 
 Mon objectif est de devenir un expert en conception et développement d'applications, en créant des solutions 
 adaptées aux besoins des utilisateurs et des entreprises.
 
-Parcours académique :
+Parcours académique (diplômes):
 2022 : Obtention d’un Baccalauréat STI2D SIN (Systèmes d’Information et Numérique) au Lycée Christophe Colomb.
-2024 : Validation d’un Bac+2 Intégrateur-Développeur Web à l'ETNA.
-2025 : Obtention prévue d’un Bachelor Concepteur Développeur d’Applications à l’ETNA.
+2024 : Validation de mon diplôme Bac+2 Intégrateur-Développeur Web à l'ETNA.
+2025 : Obtention d’un Bachelor Concepteur Développeur d’Applications à l’ETNA.
 Ces formations m'ont permis d'acquérir une solide base en programmation, en conception de projets et en technologies
 web modernes.
 
@@ -104,7 +125,12 @@ Accéder à des responsabilités en gestion de projets pour diriger des équipes
           messages: [
             {
               role: "system",
-              content: `Tu es un assistant personnel de Rayene. Utilise les informations suivantes pour répondre : ${personalData}`,
+              content: `Tu es un assistant personnel de Rayene. Tu dois répondre seulement par la première 
+              personne du singulier pour parler comme si tu étais Rayene. Il faut que lorsqu'on te pose une question
+              tu réponde seulement sans ajouter des trucs qui n'ont rien a voir, c'est à dire soit clair et conscis.
+              Tu ne dois répondre qu'aux questions qui concerne Rayene et pas aux autres question. Si on te pose quelconque
+              questions qui n'est pas en rapport avec Rayene tu dois répondre absolument "Je ne suis pas fait pour répondre à ce genre de questions, Veuillez poser une question sur Rayene." !
+              Utilise les informations suivantes pour répondre : ${personalData}`,
             },
             { role: "user", content: question },
           ],
@@ -131,9 +157,19 @@ Accéder à des responsabilités en gestion de projets pour diriger des équipes
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between px-4 sm:px-8 md:px-12 lg:px-20 py-10 gap-8">
+    <motion.div
+      variants={fadeIn("up", "spring", 0.2, 0.75)}
+      initial="hidden"
+      whileInView="show" // L'animation se déclenche quand l'élément est visible
+      className="flex flex-col md:flex-row items-center justify-between px-4 sm:px-8 md:px-12 lg:px-20 py-10 gap-8"
+    >
       {/* Section gauche - Formulaire */}
-      <div className="flex-1 p-6 bg-black-800 rounded-lg shadow-lg w-full max-w-2xl">
+      <motion.div
+        variants={fadeIn("up", "spring", 0.4, 0.75)}
+        initial="hidden"
+        whileInView="show" // L'animation se déclenche quand l'élément est visible
+        className="flex-1 p-6 bg-black-800 rounded-lg shadow-lg w-full max-w-2xl"
+      >
         <h2 className="text-white text-2xl md:text-3xl font-extrabold mb-6">
           Assistant Personnel
         </h2>
@@ -162,17 +198,22 @@ Accéder à des responsabilités en gestion de projets pour diriger des équipes
             <p className="text-gray-300 mt-2">{answer}</p>
           </div>
         )}
-      </div>
+      </motion.div>
 
       {/* Section droite - GIF */}
-      <div className="flex-1 flex justify-center items-center w-full h-auto max-w-lg">
+      <motion.div
+        variants={fadeIn("up", "spring", 0.6, 0.75)}
+        initial="hidden"
+        whileInView="show" // L'animation se déclenche quand l'élément est visible
+        className="flex-1 flex justify-center items-center w-full h-auto max-w-lg"
+      >
         <img
           src={moi}
           alt="Rayene"
           className="w-full h-auto object-contain rounded-lg shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105"
         />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

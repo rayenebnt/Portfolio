@@ -20,7 +20,7 @@ const ProjectCard = ({
 }) => {
   return (
     <motion.div
-      variants={fadeIn("up", "spring", index * 0.5, 0.75)}
+      variants={fadeIn("up", "spring", index * 0.3, 0.75)}
       className="flex flex-col h-full"
     >
       <Tilt
